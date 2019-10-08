@@ -23,6 +23,12 @@ class ShipTest < Minitest::Test
   end
   def test_health_once_its_hit
     @cruiser.hit
-    assert_equal 2, @cruiser.health 
+    assert_equal 2, @cruiser.health
   end
+  def test_it_can_be_sunk
+    3.times do
+      @cruiser.hit
+    end
+    assert_equal true, @cruiser.sunk?
+  end 
 end
