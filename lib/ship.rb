@@ -13,5 +13,6 @@ class Ship
       @sunk_status = false
     else
       @sunk_status = true
-  end 
+    end 
+  end
 end
