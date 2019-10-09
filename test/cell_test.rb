@@ -55,8 +55,15 @@ class CellTest < Minitest::Test
     assert_equal "M", @cell.render
   end
 
+  def test_it_can_be_hit
+    @cell.place_ship(@cruiser)
+    assert_equal ".", @cell.render
+    @cell.fire_upon
+    @cell.fired_upon?
+    assert_equal "H", @cell.render
+  end
+ 
   def test_it_can_render_a_hit
-skip
     skip
     @cell.place_ship(@cruiser)
     assert_equal "S", @cell.render(true)
