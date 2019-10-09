@@ -1,5 +1,5 @@
 class Cell
-  attr_reader :coordinate, :ship, :empty, :damaged
+  attr_reader :coordinate, :ship, :empty
   attr_accessor :render_cell, :fire_counter
   def initialize(coordinate)
     @coordinate = coordinate
@@ -26,15 +26,17 @@ class Cell
 
   def fired_upon?
     if @fire_counter == 0
-        @damaged = false
+        damaged = false
     else
-        @damaged = true
+        damaged = true
     end
   end
 
-  def render
-    if fired_upon? == false
+  def render(ship_view = false)
+    if fired_upon? == false && ship_view == false 
       @render_cell = "."
+    elsif ship_view = true && fired_upon? == false
+        @render_cell = "S"
     elsif empty? && fired_upon? == true
       @render_cell = "M"
     elsif !empty? && fired_upon? == true
