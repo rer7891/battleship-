@@ -33,7 +33,7 @@ class Cell
   end
 
   def render(ship_view = false)
-    if fired_upon? == false && ship_view == false 
+    if fired_upon? == false && ship_view == false
       @render_cell = "."
     elsif ship_view = true && fired_upon? == false
         @render_cell = "S"
@@ -44,4 +44,7 @@ class Cell
     end
   end
 
+    def sunk?
+      @ship.health == 0
+    end
 end

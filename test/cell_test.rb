@@ -70,7 +70,6 @@ class CellTest < Minitest::Test
   end
 
   def test_it_can_render_a_hit
-    skip
     @cell.place_ship(@cruiser)
     assert_equal "S", @cell.render(true)
     @cell.fire_upon
@@ -79,7 +78,6 @@ class CellTest < Minitest::Test
   end
 
   def test_it_can_be_sunk
-skip
     assert_equal false, @cruiser.sunk?
     @cruiser.hit
     @cruiser.hit
