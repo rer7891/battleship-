@@ -17,32 +17,32 @@ class CellTest < Minitest::Test
     assert_equal "B4", @cell.coordinate
   end
   def test_it_starts_empty
-  skip
     assert_equal nil, @cell.ship
     assert_equal true, @cell.empty?
   end
   def test_it_can_add_a_ship
-  skip
-    @cell.place_ship(cruiser)
+    @cell.place_ship(@cruiser)
 
     assert_equal @cruiser, @cell.ship
     assert_equal false, @cell.empty?
   end
   def test_it_can_be_fired_on
-  skip
+    @cell.place_ship(@cruiser)
     refute @cell.fired_upon?
     @cell.fire_upon
     assert_equal 2, @cell.ship.health
     assert_equal true, @cell.fired_upon?
   end
   def test_it_can_change_render_output
-  skip
+    @cell.place_ship(@cruiser)
     assert_equal ".", @cell.render
     @cell.fire_upon
+    @cell.fired_upon?
     assert_equal "M", @cell.render
   end
   def test_it_can_render_a_hit
-    @cell.place_ship(cruiser)
+    skip
+    @cell.place_ship(@cruiser)
     assert_equal "S", @cell.render(true)
     @cell.fire_upon
     assert_equal "H", @cell.render
