@@ -39,6 +39,8 @@ class Cell
         @render_cell = "S"
     elsif empty? && fired_upon? == true
       @render_cell = "M"
+    elsif sunk?
+      @render_cell = "X"
     elsif !empty? && fired_upon? == true
       @render_cell  = "H"
     end
