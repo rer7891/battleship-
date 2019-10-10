@@ -27,7 +27,7 @@ class Board
     horizonal_character = coors.map { |x| x[0] }
     vertical_character = coors.map { |x| x[1].to_i }
 
-    horizonal_character.all? && vertical_character.each_cons(2).all? {|a, b| b == a + 1}
+    (horizonal_character.all?) && (vertical_character.each_cons(2).all? {|a, b| b == a + 1})
    end
 
 
