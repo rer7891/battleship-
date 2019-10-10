@@ -33,7 +33,13 @@ class BoardTest < Minitest::Test
     assert_equal true, @board.validate_placement?(@cruiser, ["A1", "A2", "A3"])
   end
 
-  def test_it_validate_hortizontal
+  def test_it_validates_consecutive
+    assert_equal false, @board.validate_placement?(@cruiser, ["A1", "A2", "A4"])
+    assert_equal false, @board.validate_placement?(@submarine, ["A1", "C1"])
+    assert_equal false, @board.validate_placement?(@cruiser, ["A3", "A2", "A1"])
+    assert_equal false, @board.validate_placement?(@submarine, ["C1", "B1"])
+    assert_equal false, @board.validate_placement?(@cruiser, ["A1", "A1", "A1"])
+    assert_equal true, @board.validate_placement?(@cruiser, ["A1", "A2", "A3"])
   end
 
 end

@@ -15,22 +15,19 @@ class Board
   def validate_placement?(ship, coors)
     some = coors.map {|coor| valid_coordinate?(coor)}
     some.all?
-    verify_length(ship, coors)
-    # letter_array = array.map { |x| x.[0] }
-    # number_array = array.map { |x| x.[1] }
-verify_horizontal(ship, coors)
+
+    verify_length(ship, coors) && verify_horizontal(ship, coors)
 
   end
   def verify_length(ship, coors)
     coors.length == ship.length
   end
   def verify_horizontal(ship, coors)
+
     horizonal_character = coors.map { |x| x[0] }
-    horizonal_character.all?
-require "pry"; binding.pry
+    vertical_character = coors.map { |x| x[1].to_i }
 
-    # && vertical_character = coors.map { |x| x[1].to_i } 
-
+    horizonal_character.all? && vertical_character.each_cons(2).all? {|a, b| b == a + 1}
    end
 
 
