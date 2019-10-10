@@ -4,7 +4,7 @@ class Cell
   def initialize(coordinate)
     @coordinate = coordinate
     @empty = true
-    @fire_counter = 0
+    @fire_counter = false 
   end
 
   def empty?
@@ -20,29 +20,29 @@ class Cell
   end
 
   def fire_upon
-    @fire_counter += 1
+    @fire_counter = true
     @ship.health -= 1 if !empty?
   end
 
   def fired_upon?
-     @fire_counter != 0
+     @fire_counter
   end
 
   def render(ship_view = false)
     if fired_upon? == false && ship_view == false
-      @render_cell = "."
+      "."
     elsif ship_view = true && fired_upon? == false
-        @render_cell = "S"
+      "S"
     elsif empty? && fired_upon? == true
-      @render_cell = "M"
+      "M"
     elsif sunk?
-      @render_cell = "X"
+      "X"
     elsif !empty? && fired_upon? == true
-      @render_cell  = "H"
+      "H"
     end
   end
 
-    def sunk?
-      @ship.health == 0
-    end
+    # def sunk?
+    #   @ship.health == 0
+    # end
 end
