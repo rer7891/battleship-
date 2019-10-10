@@ -25,11 +25,11 @@ class Cell
   end
 
   def fired_upon?
-    if @fire_counter == 0
-        damaged = false
-    else
-        damaged = true
-    end
+     @fire_counter != 0
+    #     damaged = false
+    # else
+    #     damaged = true
+    # end
   end
 
   def render(ship_view = false)
