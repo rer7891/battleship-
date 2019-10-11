@@ -30,8 +30,7 @@ class Board
     (horizonal_character.all? { |char| char == horizonal_character.first}) && (vertical_character.each_cons(2).all? {|a, b| b == a + 1})
   end
   def verify_vertical(coors)
-  #   # vertical_number == vertical number
-  #   # veritcal_letter == veritcal letter + 1
+
     vertical_letter = coors.map {|x| x[0].ord}
 
     vertical_number = coors.map { |x| x[1].to_i }
