@@ -8,13 +8,13 @@ class Board
               "D1" => Cell.new("D1"), "D2" => Cell.new("D2"), "D3" => Cell.new("D3"), "D4" => Cell.new("D4")}
   end
 
-  def valid_coordinate?(coor)
-    @cells.keys.include?(coor)
+  def valid_coordinate?(coors)
+    @cells.keys.include?(coors)
   end
 
   def validate_placement?(ship, coors)
-    some = coors.map {|coor| valid_coordinate?(coor)}
-    some.all?
+    some = coors.map {|coor| valid_coordinate?(coors)}
+    some.all? {|coor| coor == coors}
 
     verify_length(ship, coors) && verify_horizontal(ship, coors)
 
