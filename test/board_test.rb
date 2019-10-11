@@ -43,5 +43,10 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.validate_placement?(@cruiser, ["A1", "B2", "C3"])
     assert_equal false, @board.validate_placement?(@cruiser, ["A1", "B22", "C3"])
   end
-
+  def test_it_validates_diagonal
+    assert_equal false, @board.validate_placement?(@cruiser, ["A1", "B2", "C4"])
+    assert_equal false, @board.validate_placement?(@submarine, ["C2", "D3"])
+    assert_equal true, @board.validate_placement?(@submarine, ["A1", "A2"])
+    assert_equal true, @board.validate_placement?(@cruiser, ["B1", "C1", "D1"])
+  end
 end

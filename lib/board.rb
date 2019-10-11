@@ -16,7 +16,7 @@ class Board
     some = coors.map {|coor| valid_coordinate?(coors)}
     some.all? {|coor| coor == coors}
 
-    verify_length(ship, coors) && verify_horizontal(ship, coors)
+    verify_length(ship, coors) && verify_horizontal(ship, coors)|| verify_vertical(coors)
 
   end
   def verify_length(ship, coors)
@@ -30,23 +30,18 @@ class Board
     (horizonal_character.all? { |char| char == horizonal_character.first}) && (vertical_character.each_cons(2).all? {|a, b| b == a + 1})
   end
   def verify_vertical(coors)
-    # vertical_number == vertical number
-    # veritcal_letter == veritcal letter + 1
-    veritical_letter = coors.map {|x| x[0].ord}
-    vertical_letter.each_cons(2).all? {|a, b| b == a + 1}
-    vertical_number = coors.map { |x| x[1].to_i }
-    vertical_number.all? { |num| num == vertical_number.first}
+  #   # vertical_number == vertical number
+  #   # veritcal_letter == veritcal letter + 1
+    vertical_letter = coors.map {|x| x[0].ord}
 
+    vertical_number = coors.map { |x| x[1].to_i }
+
+      (vertical_number.all? { |num| num == vertical_number.first}) && (vertical_letter.each_cons(2).all? {|a, b| b == a + 1})
   end
 
-  # def place(ship, coors)
-  #   coors.map do |key, value|
-  #     cell.place_ship(ship) if key == coors
-  #   end
-  # end
-
-
-
-
-
+  def place(ship, coors)
+    coors.map do |key, value|
+      cell.place_ship(ship) if key == coors
+    end
+  end
 end
