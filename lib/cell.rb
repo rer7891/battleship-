@@ -3,7 +3,7 @@ class Cell
   def initialize(coordinate)
     @coordinate = coordinate
     @empty = true
-    @fire_counter = false
+    @fires_upon = false
   end
 
   def empty?
@@ -20,12 +20,12 @@ class Cell
   end
 
   def fire_upon
-    @fire_counter = true
+    @fires_upon = true
     @ship.health -= 1 if !empty?
   end
 
   def fired_upon?
-     @fire_counter
+     @fires_upon
   end
 
   def render(ship_view = false)
@@ -41,5 +41,4 @@ class Cell
       "H"
     end
   end
-
 end
