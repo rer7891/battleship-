@@ -37,7 +37,9 @@ class Board
   end
 
   def ship_placed?(coors)
-      #method to validate not overlapping
+    coors.any? do |coors|
+      @cells[coor].cell.empty? == true 
+    end
   end
 
   def place(ship, coors)
