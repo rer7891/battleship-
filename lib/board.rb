@@ -1,6 +1,5 @@
 class Board
-  attr_reader :cells
-
+  attr_reader :cell 
   def initialize
     @cells = {"A1" => Cell.new("A1"), "A2" => Cell.new("A2"), "A3" => Cell.new("A3"), "A4" => Cell.new("A4"),
               "B1" => Cell.new("B1"), "B2" => Cell.new("B2"), "B3" => Cell.new("B3"), "B4" => Cell.new("B4"),
@@ -14,7 +13,8 @@ class Board
   end
 
   def validate_placement?(ship, coors)
-    return false if !coors.all? {|coor| valid_coordinate?(coor) }
+    return false if !coors.all? { |coor| valid_coordinate?(coor) }
+
     verify_length(ship, coors) && verify_horizontal(ship, coors) || verify_vertical(coors)
   end
 
@@ -23,7 +23,6 @@ class Board
   end
 
   def verify_horizontal(ship, coors)
-
     horizonal_character = coors.map { |x| x[0] }
     vertical_character = coors.map { |x| x[1].to_i }
 
@@ -31,8 +30,7 @@ class Board
   end
 
   def verify_vertical(coors)
-
-    vertical_letter = coors.map {|x| x[0].ord}
+    vertical_letter = coors.map { |x| x[0].ord }
     vertical_number = coors.map { |x| x[1].to_i }
 
     (vertical_number.all? { |num| num == vertical_number.first}) && (vertical_letter.each_cons(2).all? {|a, b| b == a + 1})
@@ -43,11 +41,11 @@ class Board
   end
 
   def ship_placed?(coors)
+
       #method to validate not overlapping
   end
 
   def place(ship, coors)
-
     used_coordinates(coors) #helper method to shovel used coordinates
 
     coors.map do |coor|  #if coordinates matches @cells[key] then place ship in that cell
