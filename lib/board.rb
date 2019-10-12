@@ -14,8 +14,7 @@ class Board
   def validate_placement?(ship, coors)
     return false if !coors.all? { |coor| valid_coordinate?(coor) } || ship_placed?(coors)
 
-    (verify_length(ship, coors) && verify_horizontal(ship, coors) || verify_vertical(coors)) && (ship_placed?(coors))
-
+    verify_length(ship, coors) && verify_horizontal(ship, coors) || verify_vertical(coors)
   end
 
   def verify_length(ship, coors)
@@ -47,6 +46,16 @@ class Board
       coor == @cells[coor]
       @cells[coor].place_ship(ship)
     end
+  end
+
+  def render(ship_view = false)
+    "  1 2 3 4 \n" +
+"A . . . . \n" +
+"B . . . . \n" +
+"C . . . . \n" +
+"D . . . . \n"
+print " 1 2 3 4 \n" 
+
   end
 
 end
