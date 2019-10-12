@@ -1,10 +1,9 @@
 class Cell
   attr_reader :coordinate, :ship, :empty
-  attr_accessor :render_cell, :fire_counter
   def initialize(coordinate)
     @coordinate = coordinate
     @empty = true
-    @fire_counter = false 
+    @fires_upon = false
   end
 
   def empty?
@@ -17,15 +16,16 @@ class Cell
 
   def place_ship(ship)
     @ship = ship
+    empty?
   end
 
   def fire_upon
-    @fire_counter = true
+    @fires_upon = true
     @ship.health -= 1 if !empty?
   end
 
   def fired_upon?
-     @fire_counter
+     @fires_upon
   end
 
   def render(ship_view = false)
@@ -35,14 +35,10 @@ class Cell
       "S"
     elsif empty? && fired_upon? == true
       "M"
-    elsif sunk?
+    elsif ship.sunk?
       "X"
     elsif !empty? && fired_upon? == true
       "H"
     end
   end
-
-    # def sunk?
-    #   @ship.health == 0
-    # end
 end
