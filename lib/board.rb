@@ -1,5 +1,5 @@
 class Board
-  attr_reader :cell
+  attr_reader :cells
   def initialize
     @cells = {"A1" => Cell.new("A1"), "A2" => Cell.new("A2"), "A3" => Cell.new("A3"), "A4" => Cell.new("A4"),
               "B1" => Cell.new("B1"), "B2" => Cell.new("B2"), "B3" => Cell.new("B3"), "B4" => Cell.new("B4"),
@@ -14,7 +14,8 @@ class Board
   def validate_placement?(ship, coors)
     return false if !coors.all? { |coor| valid_coordinate?(coor) }
 
-    verify_length(ship, coors) && verify_horizontal(ship, coors) || verify_vertical(coors)
+    (verify_length(ship, coors) && verify_horizontal(ship, coors) || verify_vertical(coors)) && (ship_placed?(coors))
+
   end
 
   def verify_length(ship, coors)
@@ -36,8 +37,11 @@ class Board
   end
 
   def ship_placed?(coors)
+coors.any? do |coor|
+ @cells[coor].empty != true
 
-      #method to validate not overlapping
+
+end
   end
 
   def place(ship, coors)
