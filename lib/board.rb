@@ -12,7 +12,7 @@ class Board
   end
 
   def validate_placement?(ship, coors)
-    return false if !coors.all? { |coor| valid_coordinate?(coor) }
+    return false if !coors.all? { |coor| valid_coordinate?(coor) } || ship_placed?(coors)
 
     (verify_length(ship, coors) && verify_horizontal(ship, coors) || verify_vertical(coors)) && (ship_placed?(coors))
 
@@ -37,11 +37,9 @@ class Board
   end
 
   def ship_placed?(coors)
-coors.any? do |coor|
- @cells[coor].empty != true
-
-
-end
+    coors.any? do |coor|
+     @cells[coor].empty == false
+    end
   end
 
   def place(ship, coors)
