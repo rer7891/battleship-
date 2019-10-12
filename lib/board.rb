@@ -14,6 +14,7 @@ class Board
 
   def validate_placement?(ship, coors)
     return false if !coors.all? {|coor| valid_coordinate?(coor) }
+
     verify_length(ship, coors) && verify_horizontal(ship, coors) || verify_vertical(coors)
   end
 
@@ -40,7 +41,6 @@ class Board
   end
 
   def place(ship, coors)
-
     coors.map do |coor|
       coor == @cells[coor]
       @cells[coor].place_ship(ship)
