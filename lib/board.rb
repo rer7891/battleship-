@@ -14,10 +14,8 @@ class Board
   end
 
   def validate_placement?(ship, coors)
-    return false if !coors.all? {|coor| valid_coordinate?(coor) }# || ship_placement(coors)
-
+    return false if !coors.all? {|coor| valid_coordinate?(coor) }
     verify_length(ship, coors) && verify_horizontal(ship, coors) || verify_vertical(coors)
-
   end
 
   def verify_length(ship, coors)
@@ -35,33 +33,27 @@ class Board
   def verify_vertical(coors)
 
     vertical_letter = coors.map {|x| x[0].ord}
-
     vertical_number = coors.map { |x| x[1].to_i }
 
     (vertical_number.all? { |num| num == vertical_number.first}) && (vertical_letter.each_cons(2).all? {|a, b| b == a + 1})
   end
 
-  def used_coordinates(coors)
+  def used_coordinates(coors) #method to shovel used coorinates into an arrya
     @used_coords = coors.map {|coor| coor }
   end
 
-  def ship_placement(coors)
-    num = -1
-     coors.any? do |coor|
-       num += 1
-       coor == @used_coords[num]
-     end
+  def ship_placed?(coors)
+      #method to validate not overlapping
   end
 
   def place(ship, coors)
 
-    used_coordinates(coors)
+    used_coordinates(coors) #helper method to shovel used coordinates
 
-    coors.map do |coor|
+    coors.map do |coor|  #if coordinates matches @cells[key] then place ship in that cell
       coor == @cells[coor]
       @cells[coor].place_ship(ship)
     end
   end
-
 
 end
