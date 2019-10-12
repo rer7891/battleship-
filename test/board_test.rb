@@ -5,6 +5,7 @@ require './lib/cell'
 require './lib/board'
 
 class BoardTest < Minitest::Test
+
   def setup
     @board = Board.new
     @cruiser = Ship.new("Cruiser", 3)
@@ -46,6 +47,7 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.validate_placement?(@cruiser, ["A1", "B2", "C3"])
     assert_equal false, @board.validate_placement?(@cruiser, ["A1", "B22", "C3"])
   end
+
   def test_it_validates_diagonal
     assert_equal false, @board.validate_placement?(@cruiser, ["A1", "B2", "C4"])
     assert_equal false, @board.validate_placement?(@submarine, ["C2", "D3"])
