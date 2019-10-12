@@ -72,4 +72,20 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.validate_placement?(@submarine, ["A1", "B1"])
     assert_equal false, @board.validate_placement?(@submarine, ["A2", "A3"])
    end
+  def test_it_renders_a_board_without_ship
+    assert_equal "  1 2 3 4 \n" +
+    "A . . . . \n" +
+    "B . . . . \n" +
+    "C . . . . \n" +
+    "D . . . . \n", @board.render
+   end
+
+  def test_it_renders_a_board_with_ship
+skip
+     assert_equal "  1 2 3 4 \n" +
+    "A S S S . \n" +
+    "B . . . . \n" +
+    "C . . . . \n" +
+    "D . . . . \n", @board.render
+  end
 end
