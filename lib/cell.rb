@@ -32,12 +32,12 @@ class Cell
     if !fired_upon? && !ship_view
       "."
     elsif ship_view && !fired_upon?
-        "S"
+      "S"
     elsif empty? && fired_upon?
       "M"
     elsif @ship.sunk?
       "X"
-    elsif !empty? && fired_upon?  #&& !@ship.sunk?
+    elsif !empty? && fired_upon?  
       "H"
     end
   end

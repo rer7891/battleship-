@@ -8,7 +8,7 @@ class Board
   end
 
   def valid_coordinate?(coors)
-    @cells.keys.include?(coors)
+    @cells.key?(coors)
   end
 
   def validate_placement?(ship, coors)
@@ -48,7 +48,7 @@ class Board
     end
   end
   def render(ship_view = false)
-  
+
     if ship_view == false
       puts  "  1 2 3 4 \n "
       puts   "A #{@cells["A1"].render} #{@cells["A2"].render} #{@cells["A3"].render} #{@cells["A4"].render} \n"
