@@ -72,11 +72,8 @@ class BoardTest < Minitest::Test
    end
 
   def test_it_renders_a_board_without_ship
-    assert_equal " ", @board.render
-    # "A . . . . \n" +
-    # "B . . . . \n" +
-    # "C . . . . \n" +
-    # "D . . . . \n", @board.render
+    assert @board.render
+  @ship.pla
    end
 
   def test_it_renders_a_board_with_ship
