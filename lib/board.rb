@@ -57,7 +57,7 @@ class Board
     letters.uniq.each do |letter|
       final_board += letter
       numbers.uniq.each do |num|
-        final_board += " #{Cell.new(letter + num).render(ship_view)}"
+        final_board += " #{@cells[letter + num].render(ship_view)}"
       end
       final_board += "\n"
     end

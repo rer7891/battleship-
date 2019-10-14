@@ -20,8 +20,9 @@ class Cell
   end
 
   def fire_upon
-    @fires_upon = true
+
     @ship.hit if !empty?
+      @fires_upon = true
   end
 
   def fired_upon?
@@ -29,16 +30,18 @@ class Cell
   end
 
   def render(ship_view = false)
-    if !fired_upon? && !ship_view
+
+    if !fired_upon? && !ship_view || !fired_upon? && empty? && ship_view
       "."
-    elsif ship_view && !fired_upon?
-      "S"
+    elsif !fired_upon? && !empty? && ship_view
+       "S"
     elsif empty? && fired_upon?
       "M"
-    elsif @ship.sunk?
-      "X"
-    elsif !empty? && fired_upon?
+    elsif !empty? && fired_upon? && !ship.sunk?
       "H"
+    elsif !empty? && ship.sunk?
+      "X"
+
     end
   end
 end

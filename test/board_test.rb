@@ -10,9 +10,10 @@ class BoardTest < Minitest::Test
     @board = Board.new
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
-    @cell_1 = @board.cells["A1"]
-    @cell_2 = @board.cells["A2"]
-    @cell_3 = @board.cells["A3"]
+    @cell_A1 = @board.cells["A1"]
+    @cell_A2 = @board.cells["A2"]
+    @cell_A3 = @board.cells["A3"]
+    @cell_C3 = @board.cells["C3"]
   end
 
   def test_it_exists
@@ -59,10 +60,10 @@ class BoardTest < Minitest::Test
   def test_it_can_place_a_ship
 
     @board.place(@cruiser, ["A1", "A2", "A3"])
-    assert_equal @cruiser, @cell_1.ship
-    assert_equal @cruiser, @cell_2.ship
-    assert_equal @cruiser, @cell_3.ship
-    assert @cell_3.ship == @cell_2.ship
+    assert_equal @cruiser, @cell_A1.ship
+    assert_equal @cruiser, @cell_A2.ship
+    assert_equal @cruiser, @cell_A3.ship
+    assert @cell_A3.ship == @cell_A2.ship
   end
 
   def test_it_does_not_overlap_placed_ship
@@ -72,11 +73,20 @@ class BoardTest < Minitest::Test
    end
 
   def test_it_renders_a_board_without_ship
-    skip
     @board.render
-    @cell.place_ship
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    @board.render(true)
+    @cell_A1.fire_upon
+    @board.render
 
+    @cell_A2.fire_upon
+    @board.render(true)
 
+    @cell_C3.fire_upon
+    @board.render
+
+    @cell_A3.fire_upon
+    @board.render(true)
    end
 
   def test_it_renders_a_board_with_ship
