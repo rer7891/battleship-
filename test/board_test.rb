@@ -70,31 +70,37 @@ class BoardTest < Minitest::Test
     @board.place(@cruiser, ["A1", "A2", "A3"])
     assert_equal false, @board.validate_placement?(@submarine, ["A1", "B1"])
     assert_equal false, @board.validate_placement?(@submarine, ["A2", "A3"])
-   end
+  end
 
-  def test_it_renders_a_board_without_ship
+  def test_it_can_render_board
+    assert_equal ".", @cell_A1.render
+  end
+
+  def test_it_render_cell_with_ship
     @board.render
     @board.place(@cruiser, ["A1", "A2", "A3"])
-    @board.render(true)
+    # @board.render(true)
+    assert_equal "S", @cell_A1.render(true)
+  end
+
+  def test_it_can_render_hit
+    @board.place(@cruiser, ["A1", "A2", "A3"])
     @cell_A1.fire_upon
-    @board.render
+    assert_equal "H", @cell_A1.render
+  end
 
-    @cell_A2.fire_upon
-    @board.render(true)
-
+  def test_it_can_render_miss_ship
     @cell_C3.fire_upon
-    @board.render
+    assert_equal "M", @cell_C3.render
+  end
 
+  def test_it_can_render_sunk_ship
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    @cell_A1.fire_upon
+    @cell_A2.fire_upon
     @cell_A3.fire_upon
-    @board.render(true)
-   end
-
-  def test_it_renders_a_board_with_ship
-  skip
-     assert_equal "  1 2 3 4 \n" +
-    "A S S S . \n" +
-    "B . . . . \n" +
-    "C . . . . \n" +
-    "D . . . . \n", @board.render(true)
+    assert_equal "X", @cell_A1.render
+    assert_equal "X", @cell_A2.render
+    assert_equal "X", @cell_A3.render
   end
 end

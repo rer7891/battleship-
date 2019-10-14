@@ -41,7 +41,6 @@ class Cell
       "H"
     elsif !empty? && ship.sunk?
       "X"
-
     end
   end
 end
