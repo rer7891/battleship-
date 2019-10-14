@@ -68,8 +68,7 @@ class Board
   #   x + i
   # end
   # end
-  final_board = " "
-
+  # final_board = " "
   end
 
 end

@@ -80,11 +80,11 @@ class BoardTest < Minitest::Test
    end
 
   def test_it_renders_a_board_with_ship
-skip
+  skip
      assert_equal "  1 2 3 4 \n" +
     "A S S S . \n" +
     "B . . . . \n" +
     "C . . . . \n" +
-    "D . . . . \n", @board.render
+    "D . . . . \n", @board.render(true)
   end
 end

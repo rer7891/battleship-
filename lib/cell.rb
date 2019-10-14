@@ -21,7 +21,7 @@ class Cell
 
   def fire_upon
     @fires_upon = true
-    @ship.hit if !empty? #call hit on ship.hit
+    @ship.hit if !empty?
   end
 
   def fired_upon?
@@ -35,7 +35,7 @@ class Cell
       "S"
     elsif empty? && fired_upon?
       "M"
-    elsif ship.sunk?
+    elsif @ship.sunk?
       "X"
     elsif !empty? && fired_upon?
       "H"
