@@ -3,7 +3,7 @@ require 'minitest/pride'
 require './lib/ship'
 
 class ShipTest < Minitest::Test
-  
+
   def setup
     @cruiser = Ship.new("Cruiser", 3)
   end
@@ -34,9 +34,9 @@ class ShipTest < Minitest::Test
   end
 
   def test_it_can_be_sunk
-    3.times do
       @cruiser.hit
-    end
+      @cruiser.hit
+      @cruiser.hit
     assert_equal true, @cruiser.sunk?
   end
 end

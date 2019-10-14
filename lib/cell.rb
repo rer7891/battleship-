@@ -7,7 +7,7 @@ class Cell
   end
 
   def empty?
-   if @ship == nil
+   if @ship == nil #could refactor down to @empty if @ship == nil
       @empty
    else
       @empty = false
@@ -21,7 +21,7 @@ class Cell
 
   def fire_upon
     @fires_upon = true
-    @ship.health -= 1 if !empty?
+    @ship.hit if !empty?
   end
 
   def fired_upon?
@@ -29,16 +29,16 @@ class Cell
   end
 
   def render(ship_view = false)
-    if empty? && fired_upon? == false && ship_view == false
+    if !fired_upon? && !ship_view
       "."
-    elsif !empty? && ship_view = true && fired_upon? == false
+    elsif ship_view && !fired_upon?
         "S"
-    elsif empty? && fired_upon? == true
+    elsif empty? && fired_upon?
       "M"
-    elsif !empty? && fired_upon? == true
-      "H"
-    elsif @ship.sunk? == true 
+    elsif @ship.sunk?
       "X"
+    elsif !empty? && fired_upon?  #&& !@ship.sunk?
+      "H"
     end
   end
 end

@@ -37,6 +37,13 @@ class BattleShip
     end
   end
 
+#coord = []
+#until @board.validate_placement?(ship, coord) == true do
+#    coord = @board.cells.values.sample(ship.length)
+#    end
+#  coord
+#end 
+
   def place_player_ship
   end
 
