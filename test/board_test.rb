@@ -73,16 +73,8 @@ class BoardTest < Minitest::Test
 
   def test_it_renders_a_board_without_ship
     skip
-<<<<<<< HEAD
-    assert_equal "1 2 3 4 \n" +
-    "A . . . . \n" +
-    "B . . . . \n" +
-    "C . . . . \n" +
-    "D . . . .", @board.render
-=======
     assert @board.render
   @ship.pla
->>>>>>> 30e6717ef3d9e37fb120983bc5de3a62457391ba
    end
 
   def test_it_renders_a_board_with_ship
