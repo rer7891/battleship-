@@ -22,8 +22,8 @@ class BattleShip
     valid_coordinates = false
 
     while valid_coordinates == false
-      if @board.validate_placement?(ship, new_coords) == true
-        @board.place(ship, new_coords)
+      if @board.validate_placement?(ship, coords) == true
+        @board.place(ship, coords)
         valid_coordinates = true
       else
         coords = @board.cells.keys.sample(ship.length)
