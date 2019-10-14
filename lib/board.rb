@@ -63,12 +63,7 @@ class Board
     end
     final_board
 
-  # ("A".."D").to_a.each do |x|
-  #   (1..4).to_a.each do |i|
-  #   x + i
-  # end
-  # end
-  # final_board = " "
+
   end
 
 end
