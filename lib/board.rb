@@ -8,7 +8,7 @@ class Board
   end
 
   def valid_coordinate?(coors)
-    @cells.keys.include?(coors)
+    @cells.key?(coors)
   end
 
   def validate_placement?(ship, coors)
@@ -48,7 +48,28 @@ class Board
       @cells[coor].place_ship(ship)
     end
   end
+
   def render(ship_view = false)
-    print  "  1 2 3 4 \n" "A #{@cells["A1"].render} #{@cells["A2"].render} #{@cells["A3"].render} #{@cells["A4"].render} \n" "B #{@cells["B1"].render} #{@cells["B2"].render} #{@cells["B3"].render} #{@cells["B4"].render} \n" "C #{@cells["C1"].render} #{@cells["C2"].render} #{@cells["C3"].render} #{@cells["C4"].render} \n" "D #{@cells["D1"].render} #{@cells["D2"].render} #{@cells["D3"].render} #{@cells["D4"].render}"
+    final_board = " "
+    letters = @cells.keys.map { |x| x[0] }
+    numbers = @cells.keys.map { |x| x[1] }
+    final_board += numbers.uniq.join(" ") + "\n"
+    letters.uniq.each do |letter|
+      final_board += letter
+      numbers.uniq.each do |num|
+        final_board += " #{Cell.new(letter + num).render(ship_view)}"
+      end
+      final_board += "\n"
+    end
+    final_board
+
+  # ("A".."D").to_a.each do |x|
+  #   (1..4).to_a.each do |i|
+  #   x + i
+  # end
+  # end
+  final_board = " "
+
   end
+
 end
