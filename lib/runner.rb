@@ -8,7 +8,6 @@ require './lib/play_game'
 @board = Board.new
 @play = BattleShip.new(@board)
 
-@board.place(@cruiser, ["A1","A2","A3"])
 @play.start_game
 
 
