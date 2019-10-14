@@ -8,9 +8,9 @@ class Cell
 
   def empty?
    if @ship == nil
-      @empty
+    @empty
    else
-      @empty = false
+    @empty = false
    end
   end
 
