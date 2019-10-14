@@ -37,7 +37,7 @@ class Cell
       "M"
     elsif @ship.sunk?
       "X"
-    elsif !empty? && fired_upon?  
+    elsif !empty? && fired_upon?
       "H"
     end
   end

@@ -13,6 +13,10 @@ class Ship
   end
 
   def sunk?
-    @sunk_status = true if @health < 1
+    if @health >= 1
+      @sunk_status = false
+    else
+      @sunk_status = true
+    end
   end
 end
