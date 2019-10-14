@@ -72,6 +72,7 @@ class BoardTest < Minitest::Test
    end
 
   def test_it_renders_a_board_without_ship
+    skip
     assert @board.render
   @ship.pla
    end
