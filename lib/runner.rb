@@ -6,10 +6,9 @@ require './lib/play_game'
 @cell = Cell.new("B4")
 @cruiser = Ship.new("Cruiser", 3)
 @board = Board.new
-@play = PlayBattleShip(@board)
+@play = BattleShip.new(@board)
 
 @board.place(@cruiser, ["A1","A2","A3"])
-@board.render(true)
 @play.start_game
 
 
