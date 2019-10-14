@@ -7,13 +7,11 @@ require './lib/cell'
 class CellTest < Minitest::Test
 
   def setup
-
     @cell = Cell.new("B4")
     @cruiser = Ship.new("Cruiser", 3)
   end
 
   def test_it_exists
-
     assert_instance_of Cell, @cell
   end
 
@@ -22,14 +20,13 @@ class CellTest < Minitest::Test
   end
 
   def test_it_starts_empty
-    assert_equal nil, @cell.ship
+    assert_nil @cell.ship
     assert_equal true, @cell.empty?
     assert_equal ".", @cell.render
   end
 
   def test_it_can_add_a_ship
     @cell.place_ship(@cruiser)
-
     assert_equal @cruiser, @cell.ship
     assert_equal false, @cell.empty?
   end

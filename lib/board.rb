@@ -8,11 +8,12 @@ class Board
   end
 
   def valid_coordinate?(coors)
-    @cells.keys.include?(coors)
+    @cells.key?(coors)
   end
 
   def validate_placement?(ship, coors)
-    return false if !coors.all? { |coor| valid_coordinate?(coor) } #|| ship_placed?(coors)
+    return false if !coors.all? { |coor| valid_coordinate?(coor) }
+    return false if ship_placed?(coors)
 
     verify_length(ship, coors) && verify_horizontal(ship, coors) || verify_vertical(coors)
   end
@@ -35,17 +36,39 @@ class Board
     (vertical_number.all? { |num| num == vertical_number.first}) && (vertical_letter.each_cons(2).all? {|a, b| b == a + 1})
   end
 
-  # def ship_placed?(coors)
-  #   coors.any? do |coor|
-  #     @cells[coor]  empty? == true
-  #   end
-  # end
+  def ship_placed?(coors)
+    coors.any? do |coor|
+     @cells[coor].empty == false
+    end
+  end
 
   def place(ship, coors)
     coors.map do |coor|
       coor == @cells[coor]
       @cells[coor].place_ship(ship)
     end
+  end
+
+  def render(ship_view = false)
+    final_board = " "
+    letters = @cells.keys.map { |x| x[0] }
+    numbers = @cells.keys.map { |x| x[1] }
+    final_board += numbers.uniq.join(" ") + "\n"
+    letters.uniq.each do |letter|
+      final_board += letter
+      numbers.uniq.each do |num|
+        final_board += " #{Cell.new(letter + num).render(ship_view)}"
+      end
+      final_board += "\n"
+    end
+    final_board
+
+  # ("A".."D").to_a.each do |x|
+  #   (1..4).to_a.each do |i|
+  #   x + i
+  # end
+  # end
+  # final_board = " "
   end
 
 end
