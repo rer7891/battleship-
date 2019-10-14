@@ -17,10 +17,7 @@ class BattleShip
   end
   def place_computer_ship(ship)
 
-    coords = @board.cells.values.sample(ship.length)
-      new_coords = coords.map do |coord|
-        coord.coordinate
-      end
+    coords = @board.cells.keys.sample(ship.length)
 
     valid_coordinates = false
 
@@ -29,20 +26,10 @@ class BattleShip
         @board.place(ship, new_coords)
         valid_coordinates = true
       else
-        coords = @board.cells.values.sample(ship.length)
-          new_coords = coords.map do |coord|
-          coord.coordinate
-        end
+        coords = @board.cells.keys.sample(ship.length)
       end
     end
   end
-
-#coord = []
-#until @board.validate_placement?(ship, coord) == true do
-#    coord = @board.cells.values.sample(ship.length)
-#    end
-#  coord
-#end 
 
   def place_player_ship
   end
