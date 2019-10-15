@@ -14,7 +14,7 @@ class BattleShip
     puts  "Enter p to Play or q to Quit"
     input = gets.chomp.downcase
       if input ==  "p"
-        setup_game
+        computer_setup_game
       else
         puts "Goodbye from Battleship. Play again soon."
       end
@@ -40,11 +40,14 @@ class BattleShip
     @board.place(ship, user_placement)
 
 
-  def setup_game
+  def computer_setup_game
 
     place_computer_ship(@computer_ship_1)
     place_computer_ship(@computer_ship_2)
 
+    player_set_up
+  end
+  def player_set_up
 
     puts "I have laid out my ships on the grid."
     puts "You now need to lay out your two ships."
@@ -54,7 +57,6 @@ class BattleShip
 
     place_player_ship(@user_ship_1)
     place_player_ship(@user_ship_2)
-
   end
   #
   # def take_turn
