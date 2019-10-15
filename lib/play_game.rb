@@ -23,10 +23,9 @@ class BattleShip
   def place_player_ship(ship)
     loop do
       puts "Enter the squares for the #{ship.name.capitalize}(#{ship.length} spaces):"
-      @user_placement = gets.chomp.split(" ")
-      @user_placement
-        if @player_board.validate_placement?(ship, @user_placement)
-           @player_board.place(ship, @user_placement)
+      user_placement = gets.chomp.split(" ")
+        if @player_board.validate_placement?(ship, user_placement)
+           @player_board.place(ship, user_placement)
            break
         else
           puts "Those are invalid coordinates. Please try again."
@@ -51,6 +50,7 @@ class BattleShip
 
     player_set_up
   end
+
   def player_set_up
 
     puts "I have laid out my ships on the grid."
@@ -62,12 +62,32 @@ class BattleShip
     place_player_ship(@user_ship_1)
     place_player_ship(@user_ship_2)
 
+    take_turn
+  end
+  def player_fires_on_cell
+    loop do
+      puts "Enter the coordinate for your shot:"
+      shot = gets.chomp
+      if @computer_board.valid_coordinate?(shot)
+        @computer_board.cells[shot].fire_upon
+        break
+      else
+        puts "Please enter a valid coordinate."
+      end
+    end
+  end
+
+  def display_boards
+    puts "=============COMPUTER BOARD============="
+    @computer_board.render
+    puts "==============PLAYER BOARD=============="
     @player_board.render(true)
   end
 
-
   def take_turn
-    user_placement
+    display_boards
+    player_fires_on_cell
+    display_boards
   end
 
   def results
