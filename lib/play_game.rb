@@ -14,7 +14,7 @@ class BattleShip
     puts  "Enter p to Play or q to Quit"
     input = gets.chomp.downcase
       if input ==  "p"
-        setup_game
+        computer_setup_game
       else
         puts "Goodbye from Battleship. Play again soon."
       end
@@ -31,22 +31,29 @@ class BattleShip
 
   def place_player_ship(ship)
 
-    puts "Enter the squares for the #{ship.name.captialize}(#{ship.length} spaces):"
-    user_placement = gets.chomp.to_a
-    until @board.validate_placement?(ship, user_placement)
+    puts "Enter the squares for the #{ship.name.capitalize}(#{ship.length} spaces):"
+    user_placement = gets.chomp.split(" ")
+
+     until @board.ship_placed?(user_placement)
       if @board.validate_placement?(ship, user_placement)
         @board.place(ship, user_placement)
       else
-          "Those are invalid coordinates. Please try again."
+          # "Those are invalid coordinates. Please try again."
+          # puts "Enter the squares for the #{ship.name.capitalize}(#{ship.length} spaces):"
+          # user_placement = gets.chomp.split(" ")
+        puts "X"
       end
     end
   end
 
-  def setup_game
+  def computer_setup_game
 
     place_computer_ship(@computer_ship_1)
     place_computer_ship(@computer_ship_2)
 
+    player_set_up
+  end
+  def player_set_up
 
     puts "I have laid out my ships on the grid."
     puts "You now need to lay out your two ships."
@@ -56,7 +63,6 @@ class BattleShip
 
     place_player_ship(@user_ship_1)
     place_player_ship(@user_ship_2)
-
   end
 
   def take_turn
