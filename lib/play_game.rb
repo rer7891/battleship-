@@ -32,15 +32,13 @@ class BattleShip
   def place_player_ship(ship)
 
     puts "Enter the squares for the #{ship.name.captialize}(#{ship.length} spaces):"
-    user_placement = gets.chomp.to_a
+    user_placement = gets.chomp.split(" ")
+
     until @board.validate_placement?(ship, user_placement)
-      if @board.validate_placement?(ship, user_placement)
-        @board.place(ship, user_placement)
-      else
-          "Those are invalid coordinates. Please try again."
-      end
+      "Those are invalid coordinates. Please try again."
     end
-  end
+    @board.place(ship, user_placement)
+
 
   def setup_game
 
@@ -58,12 +56,13 @@ class BattleShip
     place_player_ship(@user_ship_2)
 
   end
+  #
+  # def take_turn
+  #   user_placement
+  # end
+  #
+  # def results
+  # end
 
-  def take_turn
-    user_placement
-  end
-
-  def results
-  end
-
+end
 end
