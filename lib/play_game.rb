@@ -45,14 +45,12 @@ class BattleShip
   end
 
   def computer_setup_game
-
     place_computer_ship(@computer_ship_1)
     place_computer_ship(@computer_ship_2)
 
     player_set_up
   end
   def player_set_up
-
     puts "I have laid out my ships on the grid."
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long"
@@ -65,6 +63,7 @@ class BattleShip
     @player_board.render(true)
   end
 
+  def render_game
 
   def take_turn
     user_placement
