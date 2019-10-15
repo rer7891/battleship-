@@ -80,7 +80,6 @@ class BoardTest < Minitest::Test
   def test_it_render_cell_with_ship
     @board.render
     @board.place(@cruiser, ["A1", "A2", "A3"])
-    # @board.render(true)
     assert_equal "S", @cell_A1.render(true)
   end
 
