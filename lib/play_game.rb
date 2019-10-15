@@ -6,8 +6,8 @@ class BattleShip
   end
 
   def start_game
-    puts "Welcome to Battleship.
-    puts  Enter p to Play or q to Quit"
+    puts "Welcome to Battleship."
+    puts  "Enter p to Play or q to Quit"
     input = gets.chomp.downcase
       if input ==  "p"
         setup_game
@@ -19,30 +19,34 @@ class BattleShip
 
     coords = @board.cells.keys.sample(ship.length)
 
-    valid_coordinates = false
-
-    while valid_coordinates == false
-      if @board.validate_placement?(ship, coords) == true
-        @board.place(ship, coords)
-        valid_coordinates = true
-      else
+    until @board.validate_placement?(ship, coords)
         coords = @board.cells.keys.sample(ship.length)
-      end
     end
+      @board.place(ship, coords)
   end
 
   def place_player_ship
+    user_placement = gets.chomp.to_a
+    
   end
 
   def setup_game
-    @ship_1 = Ship.new("submarine", 2)
-    @ship_2 = Ship.new("cruiser", 3)
-    place_computer_ship(@ship_1)
-    place_computer_ship(@ship_2)
+    @computer_ship_1 = Ship.new("submarine", 2)
+    @computer_ship_2 = Ship.new("cruiser", 3)
+    place_computer_ship(@computer_ship_1)
+    place_computer_ship(@computer_ship_2)
+
+    puts "I have laid out my ships on the grid."
+    puts "You now need to lay out your two ships."
+    puts "The Cruiser is three units long and the Submarine is two units long"
+
     @board.render
+    puts "Enter the squares for the Cruiser (3 spaces):"
+
   end
 
   def take_turn
+    user_placement
   end
 
   def results
