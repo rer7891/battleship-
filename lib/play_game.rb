@@ -64,17 +64,27 @@ class BattleShip
 
     take_turn
   end
+
   def player_fires_on_cell
     loop do
       puts "Enter the coordinate for your shot:"
-      shot = gets.chomp
-      if @computer_board.valid_coordinate?(shot)
-        @computer_board.cells[shot].fire_upon
+      player_shot = gets.chomp
+      if @computer_board.valid_coordinate?(player_shot)
+        @computer_board.cells[player_shot].fire_upon
         break
       else
         puts "Please enter a valid coordinate."
       end
     end
+  end
+
+  def computer_fires_shot
+    cell_collection = @player_board.cells.keys
+
+    computer_shot = cell_collection.sample(1)
+
+    @player_board.cells[computer_shot[0]].fire_upon
+    cell_collection.delete(computer_shot)
   end
 
   def display_boards
@@ -87,6 +97,8 @@ class BattleShip
   def take_turn
     display_boards
     player_fires_on_cell
+    display_boards
+    computer_fires_shot
     display_boards
   end
 
