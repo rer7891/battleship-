@@ -31,33 +31,36 @@ class BattleShip
 
   def place_player_ship(ship)
 
-    puts "Enter the squares for the #{ship.name.captialize}(#{ship.length} spaces):"
-    user_placement = gets.chomp.split(" ")
+    puts "Enter the squares for the #{ship.name.capitalize}(#{ship.length} spaces):"
+    placement = gets.chomp.split(" ")
+    user_placement == @board.validate_placement?(ship, placement)
 
-    until @board.validate_placement?(ship, user_placement)
-      "Those are invalid coordinates. Please try again."
-    end
-    @board.place(ship, user_placement)
-
-
-  def computer_setup_game
-
-    place_computer_ship(@computer_ship_1)
-    place_computer_ship(@computer_ship_2)
-
-    player_set_up
-  end
-  def player_set_up
-
-    puts "I have laid out my ships on the grid."
-    puts "You now need to lay out your two ships."
-    puts "The Cruiser is three units long and the Submarine is two units long"
-
-    @board.render
-
-    place_player_ship(@user_ship_1)
-    place_player_ship(@user_ship_2)
-  end
+    until user_placement = true
+       print "Those are invalid coordinates. Please try again."
+       # puts "Enter the squares for the #{ship.name.capitalize}(#{ship.length} spaces):"
+       # user_placement = gets.chomp.split(" ")
+     end
+     # @board.place_ship
+   end
+  #
+  # def computer_setup_game
+  #
+  #   place_computer_ship(@computer_ship_1)
+  #   place_computer_ship(@computer_ship_2)
+  #
+  #   player_set_up
+  # end
+  # def player_set_up
+  #
+  #   puts "I have laid out my ships on the grid."
+  #   puts "You now need to lay out your two ships."
+  #   puts "The Cruiser is three units long and the Submarine is two units long"
+  #
+  #   @board.render
+  #
+  #   place_player_ship(@user_ship_1)
+  #   place_player_ship(@user_ship_2)
+  # end
   #
   # def take_turn
   #   user_placement
@@ -66,5 +69,4 @@ class BattleShip
   # def results
   # end
 
-end
 end
