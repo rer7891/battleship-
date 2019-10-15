@@ -68,9 +68,9 @@ class BattleShip
   def player_fires_on_cell
     loop do
       puts "Enter the coordinate for your shot:"
-      player_shot = gets.chomp
-      if @computer_board.valid_coordinate?(player_shot)
-        @computer_board.cells[player_shot].fire_upon
+      @player_shot = gets.chomp
+      if @computer_board.valid_coordinate?(@player_shot)
+        @computer_board.cells[@player_shot].fire_upon
         break
       else
         puts "Please enter a valid coordinate."
@@ -81,10 +81,10 @@ class BattleShip
   def computer_fires_shot
     cell_collection = @player_board.cells.keys
 
-    computer_shot = cell_collection.sample(1)
+    @computer_shot = cell_collection.sample(1)
 
-    @player_board.cells[computer_shot[0]].fire_upon
-    cell_collection.delete(computer_shot)
+    @player_board.cells[@computer_shot[0]].fire_upon
+    cell_collection.delete(@computer_shot)
   end
 
   def display_boards
@@ -94,12 +94,36 @@ class BattleShip
     @player_board.render(true)
   end
 
+  def display_player_results
+    if @computer_board.cells[@player_shot].render == "M"
+      puts "Your shot on #{@player_shot} was a miss."
+    elsif @computer_board.cells[@player_shot].render == "H"
+      puts "Your shot on #{@player_shot} was a hit."
+    elsif @computer_board.cells[@player_shot].render == "X"
+        puts "Your shot on #{@player_shot} sunk my ship."
+    end
+  end
+
+  def display_computer_results
+    if @player_board.cells[@computer_shot[0]].render == "M"
+      puts "Your shot on #{@computer_shot[0]} was a miss."
+
+    elsif @player_board.cells[@computer_shot[0]].render == "H"
+      puts "Your shot on #{@computer_shot[0]} was a hit."
+    elsif @player_board.cells[@computer_shot[0]].render == "X"
+        puts "Your shot on #{@computer_shot[0]} sunk my ship."
+    end
+
+  end
+
   def take_turn
     display_boards
     player_fires_on_cell
     display_boards
     computer_fires_shot
     display_boards
+    display_player_results
+    display_computer_results
   end
 
   def results
