@@ -3,6 +3,10 @@ class BattleShip
 
   def initialize(board)
     @board = board
+    @computer_ship_1 = Ship.new("submarine", 2)
+    @computer_ship_2 = Ship.new("cruiser", 3)
+    @user_ship_1 = Ship.new("cruiser", 3)
+    @user_ship_2 = Ship.new("submarine", 2)
   end
 
   def start_game
@@ -25,23 +29,33 @@ class BattleShip
       @board.place(ship, coords)
   end
 
-  def place_player_ship
+  def place_player_ship(ship)
+
+    puts "Enter the squares for the #{ship.name.captialize}(#{ship.length} spaces):"
     user_placement = gets.chomp.to_a
-    
+    until @board.validate_placement?(ship, user_placement)
+      if @board.validate_placement?(ship, user_placement)
+        @board.place(ship, user_placement)
+      else
+          "Those are invalid coordinates. Please try again."
+      end
+    end
   end
 
   def setup_game
-    @computer_ship_1 = Ship.new("submarine", 2)
-    @computer_ship_2 = Ship.new("cruiser", 3)
+
     place_computer_ship(@computer_ship_1)
     place_computer_ship(@computer_ship_2)
+
 
     puts "I have laid out my ships on the grid."
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long"
 
     @board.render
-    puts "Enter the squares for the Cruiser (3 spaces):"
+
+    place_player_ship(@user_ship_1)
+    place_player_ship(@user_ship_2)
 
   end
 
