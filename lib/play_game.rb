@@ -6,8 +6,8 @@ class BattleShip
   end
 
   def start_game
-    puts "Welcome to Battleship.
-    puts  Enter p to Play or q to Quit"
+    puts "Welcome to Battleship."
+    puts  "Enter p to Play or q to Quit"
     input = gets.chomp.downcase
       if input ==  "p"
         setup_game
