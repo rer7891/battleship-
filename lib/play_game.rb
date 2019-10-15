@@ -92,6 +92,8 @@ class BattleShip
     @player_board.render(true)
   end
 
+
+
   def take_turn
     display_boards
     player_fires_on_cell
