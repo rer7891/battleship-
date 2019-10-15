@@ -3,10 +3,8 @@ require './lib/cell'
 require './lib/board'
 require './lib/play_game'
 
-@cell = Cell.new("B4")
 @cruiser = Ship.new("Cruiser", 3)
-@board = Board.new
-@play = BattleShip.new(@board)
+@play = BattleShip.new
 
 @play.start_game
 
