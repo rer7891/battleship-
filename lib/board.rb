@@ -61,8 +61,8 @@ class Board
       end
       final_board += "\n"
     end
-    final_board
 
+    print final_board
 
   end
 
