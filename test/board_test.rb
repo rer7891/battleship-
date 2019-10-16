@@ -5,7 +5,6 @@ require './lib/cell'
 require './lib/board'
 
 class BoardTest < Minitest::Test
-
   def setup
     @board = Board.new
     @cruiser = Ship.new("Cruiser", 3)
@@ -32,6 +31,7 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_coordinate?("E1")
     assert_equal false, @board.valid_coordinate?("A22")
   end
+
   def test_it_verifies_length
     assert_equal @cruiser.length == @cell_array.length, @board.verify_length(@cruiser, @cell_array)
   end
