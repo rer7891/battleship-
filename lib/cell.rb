@@ -33,7 +33,7 @@ class Cell
     if !fired_upon? && !ship_view || !fired_upon? && empty? && ship_view
       "."
     elsif !fired_upon? && !empty? && ship_view
-       "S"
+      "S"
     elsif empty? && fired_upon?
       "M"
     elsif !empty? && fired_upon? && !ship.sunk?
