@@ -41,6 +41,7 @@ class BattleShip
       else
         puts "Goodbye from Battleship. Play again soon."
       end
+
   end
 
   def computer_setup_game
@@ -67,7 +68,10 @@ class BattleShip
     loop do
       puts "Enter the coordinate for your shot:"
       @player_shot = gets.chomp
-      if @computer_board.valid_coordinate?(@player_shot)
+      if @computer_board.cells[@player_shot].fired_upon?
+        puts "You have already fired on this coordinate."
+        puts "Please enter a valid coordinate."
+      elsif @computer_board.valid_coordinate?(@player_shot)
         @computer_board.cells[@player_shot].fire_upon
         break
       else
@@ -104,31 +108,34 @@ class BattleShip
 
   def display_computer_results
     if @player_board.cells[@computer_shot[0]].render == "M"
-      puts "Your shot on #{@computer_shot[0]} was a miss."
+      puts "My shot on #{@computer_shot[0]} was a miss."
+
     elsif @player_board.cells[@computer_shot[0]].render == "H"
-      puts "Your shot on #{@computer_shot[0]} was a hit."
+      puts "My shot on #{@computer_shot[0]} was a hit."
     elsif @player_board.cells[@computer_shot[0]].render == "X"
-        puts "Your shot on #{@computer_shot[0]} sunk my ship."
+        puts "My shot on #{@computer_shot[0]} sunk my ship."
     end
   end
 
   def take_turn
-    while @computer_ship_1.sunk?
-    display_boards
+   until @computer_ship_1.sunk? && @computer_ship_2.sunk? || @user_ship_1.sunk? && @user_ship_2.sunk?
     player_fires_on_cell
-    display_boards
-    computer_fires_shot
-    display_boards
-    display_player_results
-    display_computer_results
-    if player_Ship sunk?  true
-      puts "you lose"
-      if computer_ship sunk? true
-        puts "you win"
-      end
+      computer_fires_shot
+      display_boards
+      display_player_results
+      display_computer_results
+      display_boards
+   end
+   results
   end
 
   def results
+    if  @computer_ship_1.sunk? && @computer_ship_2.sunk?
+      puts "You win"
+    else
+      puts "You lose"
+    end
+    start_game
   end
 
 end

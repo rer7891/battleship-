@@ -14,6 +14,7 @@ class BoardTest < Minitest::Test
     @cell_A2 = @board.cells["A2"]
     @cell_A3 = @board.cells["A3"]
     @cell_C3 = @board.cells["C3"]
+    @cell_array = ["A1", "A2", "A3"]
   end
 
   def test_it_exists
@@ -30,6 +31,19 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_coordinate?("A5")
     assert_equal false, @board.valid_coordinate?("E1")
     assert_equal false, @board.valid_coordinate?("A22")
+  end
+  def test_it_verifies_length
+    assert_equal @cruiser.length == @cell_array.length, @board.verify_length(@cruiser, @cell_array)
+  end
+
+  def test_it_verifies_horizontal
+    assert_equal false, @board.verify_horizontal(@cruiser, ["D2", "C1", "C2"])
+    assert_equal true, @board.verify_horizontal(@cruiser, @cell_array)
+  end
+
+  def test_it_verifies_vertical
+    assert_equal false, @board.verify_vertical(["D1", "C1", "C2"])
+    assert_equal true, @board.verify_vertical(["B1", "C1", "D1"])
   end
 
   def test_if_validate_length
@@ -55,11 +69,14 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.validate_placement?(@submarine, ["C2", "D3"])
     assert_equal true, @board.validate_placement?(@submarine, ["A1", "A2"])
     assert_equal true, @board.validate_placement?(@cruiser, ["B1", "C1", "D1"])
-
+  end
+  def test_a_ship_is_placed
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert_equal true, @board.ship_placed?(["A1", "A2", "A3"])
+    assert_equal false, @board.ship_placed?(["B2", "B3"])
   end
 
   def test_it_can_place_a_ship
-
     @board.place(@cruiser, ["A1", "A2", "A3"])
     assert_equal @cruiser, @cell_A1.ship
     assert_equal @cruiser, @cell_A2.ship
