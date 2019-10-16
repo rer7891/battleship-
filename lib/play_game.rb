@@ -1,6 +1,4 @@
 class BattleShip
-  attr_reader :ship
-
   def initialize
     @computer_board = Board.new
     @player_board = Board.new
@@ -11,9 +9,7 @@ class BattleShip
   end
 
   def place_computer_ship(ship)
-
     coords = @computer_board.cells.keys.sample(ship.length)
-
     until @computer_board.validate_placement?(ship, coords)
         coords = @computer_board.cells.keys.sample(ship.length)
     end
@@ -32,6 +28,7 @@ class BattleShip
         end
     end
   end
+
   def start_game
     puts "Welcome to Battleship."
     puts  "Enter p to Play or q to Quit"
@@ -41,11 +38,9 @@ class BattleShip
       else
         puts "Goodbye from Battleship. Play again soon."
       end
-
   end
 
   def computer_setup_game
-
     place_computer_ship(@computer_ship_1)
     place_computer_ship(@computer_ship_2)
 
@@ -53,7 +48,6 @@ class BattleShip
   end
 
   def player_set_up
-
     puts "I have laid out my ships on the grid."
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long"
@@ -111,13 +105,11 @@ class BattleShip
   def display_computer_results
     if @player_board.cells[@computer_shot[0]].render == "M"
       puts "My shot on #{@computer_shot[0]} was a miss."
-
     elsif @player_board.cells[@computer_shot[0]].render == "H"
       puts "My shot on #{@computer_shot[0]} was a hit."
     elsif @player_board.cells[@computer_shot[0]].render == "X"
         puts "My shot on #{@computer_shot[0]} sunk my ship."
     end
-
   end
 
   def take_turn
@@ -138,7 +130,5 @@ class BattleShip
     else
       puts "You lose"
     end
-    start_game
   end
-
 end
