@@ -1,4 +1,5 @@
 class BattleShip
+
   def initialize
     @computer_board = Board.new
     @player_board = Board.new
@@ -19,7 +20,7 @@ class BattleShip
   def place_player_ship(ship)
     loop do
       puts "Enter the squares for the #{ship.name.capitalize}(#{ship.length} spaces):"
-      user_placement = gets.chomp.split(" ")
+      user_placement = gets.chomp.upcase.gsub(",","").split(" ")
         if @player_board.validate_placement?(ship, user_placement)
            @player_board.place(ship, user_placement)
            break
@@ -27,17 +28,6 @@ class BattleShip
           puts "Those are invalid coordinates. Please try again."
         end
     end
-  end
-
-  def start_game
-    puts "Welcome to Battleship."
-    puts  "Enter p to Play or q to Quit"
-    input = gets.chomp.downcase
-      if input ==  "p"
-        computer_setup_game
-      else
-        puts "Goodbye from Battleship. Play again soon."
-      end
   end
 
   def computer_setup_game
@@ -63,16 +53,18 @@ class BattleShip
   def player_fires_on_cell
     loop do
       puts "Enter the coordinate for your shot:"
-      @player_shot = gets.chomp
-      if @computer_board.cells[@player_shot].fired_upon?
-        puts "You have already fired on this coordinate."
-        puts "Please enter a valid coordinate."
-      elsif @computer_board.valid_coordinate?(@player_shot)
+
+      @player_shot = gets.chomp.upcase
+
+      if @computer_board.valid_coordinate?(@player_shot) && !@computer_board.cells[@player_shot].fired_upon?
         @computer_board.cells[@player_shot].fire_upon
         break
-      else
+      elsif !@computer_board.valid_coordinate?(@player_shot)
         puts "Please enter a valid coordinate."
-      end
+      elsif @computer_board.cells[@player_shot].fired_upon?
+        puts "You have already fired on this coordinate."
+        puts "Please enter a valid coordinate."
+    end
     end
   end
 
@@ -98,7 +90,7 @@ class BattleShip
     elsif @computer_board.cells[@player_shot].render == "H"
       puts "Your shot on #{@player_shot} was a hit."
     elsif @computer_board.cells[@player_shot].render == "X"
-        puts "Your shot on #{@player_shot} sunk my ship."
+      puts "Your shot on #{@player_shot} sunk my ship."
     end
   end
 
@@ -108,19 +100,34 @@ class BattleShip
     elsif @player_board.cells[@computer_shot[0]].render == "H"
       puts "My shot on #{@computer_shot[0]} was a hit."
     elsif @player_board.cells[@computer_shot[0]].render == "X"
-        puts "My shot on #{@computer_shot[0]} sunk my ship."
+      puts "My shot on #{@computer_shot[0]} sunk my ship."
     end
+  end
+
+  def start_game
+    puts "Welcome to Battleship."
+    puts  "Enter p to Play or q to Quit"
+    input = gets.chomp.downcase[0]
+      if input == "p"
+        computer_setup_game
+      elsif input == "q"
+        puts "Goodbye from Battleship. Play again soon."
+      else
+          puts "Please try again."
+      end
+
   end
 
   def take_turn
    until @computer_ship_1.sunk? && @computer_ship_2.sunk? || @user_ship_1.sunk? && @user_ship_2.sunk?
     player_fires_on_cell
-      computer_fires_shot
-      display_boards
-      display_player_results
-      display_computer_results
-      display_boards
+    computer_fires_shot
+    display_boards
+    display_player_results
+    display_computer_results
+    display_boards
    end
+   display_boards
    results
   end
 
@@ -130,5 +137,7 @@ class BattleShip
     else
       puts "You lose"
     end
+    initialize
+    start_game
   end
 end
