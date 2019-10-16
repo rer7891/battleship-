@@ -115,11 +115,11 @@ class BattleShip
   def take_turn
    until @computer_ship_1.sunk? && @computer_ship_2.sunk? || @user_ship_1.sunk? && @user_ship_2.sunk?
     player_fires_on_cell
-      computer_fires_shot
-      display_boards
-      display_player_results
-      display_computer_results
-      display_boards
+    computer_fires_shot
+    display_boards
+    display_player_results
+    display_computer_results
+    display_boards
    end
    results
   end
