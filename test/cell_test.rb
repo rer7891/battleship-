@@ -5,7 +5,6 @@ require './lib/ship'
 require './lib/cell'
 
 class CellTest < Minitest::Test
-
   def setup
     @cell = Cell.new("B4")
     @cruiser = Ship.new("Cruiser", 3)

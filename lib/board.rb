@@ -72,5 +72,4 @@ class Board
     end
     print final_board
   end
-
 end

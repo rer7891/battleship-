@@ -1,6 +1,4 @@
 class BattleShip
-  attr_reader :ship
-
   def initialize
     @computer_board = Board.new
     @player_board = Board.new
@@ -11,9 +9,7 @@ class BattleShip
   end
 
   def place_computer_ship(ship)
-
     coords = @computer_board.cells.keys.sample(ship.length)
-
     until @computer_board.validate_placement?(ship, coords)
         coords = @computer_board.cells.keys.sample(ship.length)
     end
