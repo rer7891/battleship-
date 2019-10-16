@@ -29,7 +29,6 @@ class Cell
   end
 
   def render(ship_view = false)
-
     if !fired_upon? && !ship_view || !fired_upon? && empty? && ship_view
       "."
     elsif !fired_upon? && !empty? && ship_view

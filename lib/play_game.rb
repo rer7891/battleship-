@@ -28,6 +28,7 @@ class BattleShip
         end
     end
   end
+
   def start_game
     puts "Welcome to Battleship."
     puts  "Enter p to Play or q to Quit"
@@ -37,7 +38,6 @@ class BattleShip
       else
         puts "Goodbye from Battleship. Play again soon."
       end
-
   end
 
   def computer_setup_game
@@ -105,7 +105,6 @@ class BattleShip
   def display_computer_results
     if @player_board.cells[@computer_shot[0]].render == "M"
       puts "My shot on #{@computer_shot[0]} was a miss."
-
     elsif @player_board.cells[@computer_shot[0]].render == "H"
       puts "My shot on #{@computer_shot[0]} was a hit."
     elsif @player_board.cells[@computer_shot[0]].render == "X"
@@ -131,7 +130,5 @@ class BattleShip
     else
       puts "You lose"
     end
-    start_game
   end
-
 end
